@@ -1,0 +1,19 @@
+version: "3.9"
+services:
+  web:
+    build: .
+    depends_on:
+      - db
+    ports:
+      - "4000:4001"
+    volumes:
+      - .:/code
+    environment:
+      FLASK_ENV: development
+      DATABASE_URL: postgresql+psycopg2://test:test@db/test
+  db:
+    image: postgres:13-alpine
+    environment:
+      - POSTGRES_USER=test
+      - POSTGRES_PASSWORD=test
+      - POSTGRES_DB=test
